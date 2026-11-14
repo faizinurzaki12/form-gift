@@ -50,8 +50,10 @@ async function join() {
       error.value = 'Ruangan tidak ditemukan atau sudah ditutup.'
       return
     }
+    store.setMode(room.mode || 'two')
     await addParticipant(code, guestName.value.trim(), 'guest')
     store.setRoom(code, 'guest', guestName.value.trim())
+    store.setMode('two')
     router.push(`/photobooth/room/${code}`)
   } catch (e) {
     error.value = e.message || 'Gagal masuk ruangan.'

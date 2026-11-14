@@ -2,12 +2,18 @@
   <section class="page-container">
     <BrutalButton variant="ghost" @click="$router.push('/')" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <h1>Photobooth 📸</h1>
-    <p class="subtitle">Buat ruangan baru atau masuk dengan kode.</p>
+    <p class="subtitle">Pilih mode photobooth.</p>
 
-    <div class="grid grid-2">
+    <div class="grid grid-3">
       <SquircleCard>
-        <h2>Buat Ruangan</h2>
-        <p>Buat kode ruangan otomatis untuk diajak temanmu.</p>
+        <h2>Sendiri</h2>
+        <p>Satu perangkat, satu kamera. Foto berurutan + custom frame.</p>
+        <router-link to="/photobooth/solo" class="brutal-btn" style="margin-top:12px; display:inline-flex;">Mulai Solo</router-link>
+      </SquircleCard>
+
+      <SquircleCard>
+        <h2>Buat Ruangan (2 Orang)</h2>
+        <p>Buat kode ruangan untuk diajak teman (real-time).</p>
         <router-link to="/photobooth/create" class="brutal-btn" style="margin-top:12px; display:inline-flex;">Buat Ruangan</router-link>
       </SquircleCard>
 

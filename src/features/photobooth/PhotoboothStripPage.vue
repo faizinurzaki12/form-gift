@@ -1,5 +1,6 @@
 <template>
   <section class="page-container">
+    <BrutalButton variant="ghost" @click="$router.push('/photobooth')" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <div v-if="loading" class="squircle-card">Memuat strip...</div>
     <div v-else-if="error" class="squircle-card">
       <p class="error-text">{{ error }}</p>
@@ -15,6 +16,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import BrutalButton from '../../components/ui/BrutalButton.vue'
 import { getSupabase } from '../../services/supabase/client.js'
 
 const route = useRoute()

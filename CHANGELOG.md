@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.4.0 - 2026-11-14
+- Feat: Photobooth 2 type (solo & 2 orang real-time), ref beautyplus & NEAMOR.
+- Fix: Back button ke halaman utama.
+- Test: Build dan unit test lulus.
+
 ## 1.3.0 - 2026-11-14
 - Fix: Bug tombol kembali di photobooth (kini ke halaman utama).
 - Feat: Waiting room + 2 kamera + WebRTC live preview + capture sinkron.

@@ -31,6 +31,11 @@ const routes = [
     component: () => import('../features/photobooth/PhotoboothLobbyPage.vue'),
   },
   {
+    path: '/photobooth/solo',
+    name: 'photobooth-solo',
+    component: () => import('../features/photobooth/PhotoboothSoloPage.vue'),
+  },
+  {
     path: '/photobooth/create',
     name: 'photobooth-create',
     component: () => import('../features/photobooth/PhotoboothCreatePage.vue'),

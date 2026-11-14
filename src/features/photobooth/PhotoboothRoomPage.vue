@@ -44,9 +44,10 @@
         </div>
       </div>
 
-      <!-- Kamera (2 orang) -->
+      <!-- Kamera -->
       <div class="squircle-card camera-card">
-        <div class="camera-grid-live">
+        <!-- Mode 2 orang: 2 kamera -->
+        <div v-if="store.mode === 'two'" class="camera-grid-live">
           <div class="camera-preview">
             <span class="cam-label">Kamu</span>
             <video ref="videoRef" autoplay playsinline muted class="camera-video"></video>
@@ -58,6 +59,13 @@
             <div v-if="!webrtc.connected.value" class="cam-waiting">Menunggu partner...</div>
           </div>
         </div>
+
+        <!-- Mode sendiri: 1 kamera -->
+        <div v-else class="camera-preview-single">
+          <video ref="videoRef" autoplay playsinline muted class="camera-video"></video>
+          <div v-if="countdown > 0" class="countdown-overlay">{{ countdown }}</div>
+        </div>
+
         <p v-if="camera.error" class="error-text">{{ camera.error }}</p>
 
         <div class="camera-actions">
@@ -144,6 +152,7 @@ onMounted(async () => {
     router.replace('/photobooth')
     return
   }
+  store.setMode('two')
   await camera.start('user')
 
   // Setup realtime channel
@@ -291,6 +300,40 @@ async function endSession() {
 
 @media (max-width: 720px) {
   .camera-grid-live { grid-template-columns: 1fr; }
+}
+
+.camera-preview-single {
+  position: relative;
+  display: block;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-squircle);
+  overflow: hidden;
+  box-shadow: var(--shadow-brutal);
+  aspect-ratio: 4 / 3;
+  max-width: 480px;
+  width: 100%;
+  background-color: #d9d3c8;
+  margin: 0 auto;
+}
+
+.camera-preview-single .camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.camera-preview-single .countdown-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  font-family: var(--font-display);
+  color: #FFFFFF;
+  text-shadow: 4px 4px 0 var(--color-ink);
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
 .camera-video {

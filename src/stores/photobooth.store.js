@@ -7,6 +7,7 @@ import { ref } from 'vue'
 export const usePhotoboothStore = defineStore('photobooth', () => {
   const roomCode = ref(null)
   const role = ref(null)          // 'host' | 'guest'
+  const mode = ref('single')      // 'single' | 'two'
   const displayName = ref('')
   const photos = ref([])         // dataURL foto yang diambil
   const layout = ref('2-horizontal') // '2-horizontal' | '2x2' | '3x3'
@@ -42,5 +43,17 @@ export const usePhotoboothStore = defineStore('photobooth', () => {
     timerSeconds.value = 0
   }
 
-  return { roomCode, role, displayName, photos, layout, timerSeconds, customization, setRoom, addPhoto, reset }
+  function setMode(m) { mode.value = m }
+
+  function reset() {
+    roomCode.value = null
+    role.value = null
+    mode.value = 'single'
+    displayName.value = ''
+    photos.value = []
+    layout.value = '2-horizontal'
+    timerSeconds.value = 0
+  }
+
+  return { roomCode, role, mode, displayName, photos, layout, timerSeconds, customization, setRoom, setMode, addPhoto, reset }
 })

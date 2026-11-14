@@ -4,13 +4,13 @@
 import { getSupabase } from './client.js'
 
 // Buat room baru dengan kode acak
-export async function createRoom(code, hostName) {
+export async function createRoom(code, hostName, mode = 'single') {
   const supabase = getSupabase()
   if (!supabase) throw new Error('Supabase belum terhubung.')
 
   const { data, error } = await supabase
     .from('photobooth_rooms')
-    .insert({ code, host_name: hostName, status: 'waiting' })
+    .insert({ code, host_name: hostName, mode, status: 'waiting' })
     .select()
     .single()
 
