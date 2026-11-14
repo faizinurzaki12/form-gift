@@ -1,6 +1,6 @@
 <template>
   <section class="page-container">
-    <BrutalButton variant="ghost" @click="router.push('/photobooth')" style="margin-bottom:12px;">← Kembali</BrutalButton>
+    <BrutalButton variant="ghost" @click="router.push('/')" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <SquircleCard>
       <h1>Masuk Ruangan Photobooth</h1>
       <p class="subtitle">Masukkan kode ruangan yang diberikan host.</p>

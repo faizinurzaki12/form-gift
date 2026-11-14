@@ -1,6 +1,6 @@
 <template>
   <section class="page-container">
-    <BrutalButton variant="ghost" @click="$router.back()" style="margin-bottom:12px;">← Kembali</BrutalButton>
+    <BrutalButton variant="ghost" @click="$router.push('/')" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <div class="create-header">
       <h1>Buat Hadiah</h1>
       <p class="create-subtitle">{{ subtitle }}</p>

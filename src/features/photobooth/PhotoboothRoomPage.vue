@@ -44,11 +44,19 @@
         </div>
       </div>
 
-      <!-- Kamera -->
+      <!-- Kamera (2 orang) -->
       <div class="squircle-card camera-card">
-        <div class="camera-preview">
-          <video ref="videoRef" autoplay playsinline muted class="camera-video"></video>
-          <div v-if="countdown > 0" class="countdown-overlay">{{ countdown }}</div>
+        <div class="camera-grid-live">
+          <div class="camera-preview">
+            <span class="cam-label">Kamu</span>
+            <video ref="videoRef" autoplay playsinline muted class="camera-video"></video>
+            <div v-if="countdown > 0" class="countdown-overlay">{{ countdown }}</div>
+          </div>
+          <div class="camera-preview">
+            <span class="cam-label">Partner</span>
+            <video ref="remoteVideoRef" autoplay playsinline class="camera-video"></video>
+            <div v-if="!webrtc.connected.value" class="cam-waiting">Menunggu partner...</div>
+          </div>
         </div>
         <p v-if="camera.error" class="error-text">{{ camera.error }}</p>
 
@@ -87,11 +95,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import SquircleCard from '../../components/ui/SquircleCard.vue'
 import BrutalButton from '../../components/ui/BrutalButton.vue'
 import { useCamera } from '../../composables/useCamera.js'
+import { useWebRTC } from '../../composables/useWebRTC.js'
 import { usePhotoboothStore } from '../../stores/photobooth.store.js'
 import StripEditor from '../../components/photobooth/StripEditor.vue'
 import { createRoomChannel, broadcast } from '../../services/supabase/realtime.js'
@@ -102,6 +111,17 @@ const store = usePhotoboothStore()
 const camera = useCamera()
 // Alias agar template ref bisa di-bind langsung
 const videoRef = camera.videoRef
+
+const channelRef = ref(null)
+const remoteVideoRef = ref(null)
+const webrtc = useWebRTC(channelRef, camera.stream, store.role || 'host')
+
+// Bind remote stream ke elemen video
+watch(webrtc.remoteStream, (stream) => {
+  if (remoteVideoRef.value && stream) {
+    remoteVideoRef.value.srcObject = stream
+  }
+})
 
 const cameraBusy = ref(false)
 const countdown = ref(0)
@@ -129,9 +149,9 @@ onMounted(async () => {
   // Setup realtime channel
   channel = createRoomChannel(store.roomCode)
   if (channel) {
+    channelRef.value = channel
     channel
       .on('broadcast', { event: 'photo' }, ({ payload }) => {
-        // Tambahkan foto dari remote jika belum ada
         if (payload?.dataUrl && !store.photos.includes(payload.dataUrl)) {
           store.addPhoto(payload.dataUrl)
         }
@@ -139,10 +159,18 @@ onMounted(async () => {
       .on('broadcast', { event: 'status' }, ({ payload }) => {
         if (payload?.status === 'closed') {
           alert('Sesi ditutup oleh host.')
-          router.replace('/photobooth')
+          router.replace('/')
         }
       })
-      .subscribe()
+      .on('broadcast', { event: 'signal' }, ({ payload }) => {
+        webrtc.handleSignal(payload)
+      })
+      .subscribe((status) => {
+        if (status === 'SUBSCRIBED') {
+          // Beri tahu peer bahwa kita bergabung
+          webrtc.announceJoin()
+        }
+      })
   }
 })
 
@@ -179,7 +207,7 @@ function goBack() {
   camera.stop()
   if (channel) channel.unsubscribe()
   store.reset()
-  router.push('/photobooth')
+  router.push('/')
 }
 
 async function endSession() {
@@ -217,6 +245,14 @@ async function endSession() {
   cursor: not-allowed;
 }
 .camera-card { text-align: center; }
+.camera-grid-live {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
 .camera-preview {
   position: relative;
   display: inline-block;
@@ -225,9 +261,36 @@ async function endSession() {
   overflow: hidden;
   box-shadow: var(--shadow-brutal);
   aspect-ratio: 4 / 3;       /* samakan bingkai dengan referensi */
-  max-width: 480px;
   width: 100%;
   background-color: #d9d3c8;
+}
+
+.cam-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.cam-waiting {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.4);
+  font-weight: 600;
+}
+
+@media (max-width: 720px) {
+  .camera-grid-live { grid-template-columns: 1fr; }
 }
 
 .camera-video {

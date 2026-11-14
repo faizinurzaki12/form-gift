@@ -1,6 +1,6 @@
 <template>
   <section class="page-container">
-    <BrutalButton variant="ghost" @click="$router.back()" style="margin-bottom:12px;">← Kembali</BrutalButton>
+    <BrutalButton variant="ghost" @click="$router.push('/')" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <div v-if="loading" class="squircle-card">Memuat hadiah...</div>
     <div v-else-if="error" class="squircle-card">
       <p class="error-text">{{ error }}</p>

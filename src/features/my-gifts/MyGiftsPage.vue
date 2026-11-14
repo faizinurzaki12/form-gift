@@ -1,6 +1,6 @@
 <template>
   <section class="page-container">
-    <BrutalButton variant="ghost" @click="$router.back()" style="margin-bottom:12px;">← Kembali</BrutalButton>
+    <BrutalButton variant="ghost" @click="$router.push('/')" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <h1>Hadiah Saya</h1>
     <p class="subtitle">Daftar hadiah yang pernah kamu buat di perangkat ini.</p>
 

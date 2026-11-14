@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.3.0 - 2026-11-14
+- Fix: Bug tombol kembali di photobooth (kini ke halaman utama).
+- Feat: Waiting room + 2 kamera + WebRTC live preview + capture sinkron.
+- Test: Build dan unit test lulus.
+
 ## 1.2.0 - 2026-11-14
 - Feat: Penyesuaian Photobooth mengikuti referensi (bingkai 4:3, alur room).
 - Fix: Penambahan tombol kembali di setiap halaman terkait.
