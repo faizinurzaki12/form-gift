@@ -133,5 +133,5 @@ export function useWebRTC(channelRef, localStream, role) {
 
   onUnmounted(() => close())
 
-  return { remoteStream, connected, handleSignal, announceJoin, close }
+  return { remoteStream, connected, handleSignal, announceJoin, makeOffer, close }
 }

@@ -131,6 +131,12 @@ watch(webrtc.remoteStream, (stream) => {
   }
 })
 
+watch(remoteVideoRef, (el) => {
+  if (el && webrtc.remoteStream.value) {
+    el.srcObject = webrtc.remoteStream.value
+  }
+})
+
 const cameraBusy = ref(false)
 const countdown = ref(0)
 const showEditor = ref(false)
@@ -174,8 +180,18 @@ onMounted(async () => {
       .on('broadcast', { event: 'signal' }, ({ payload }) => {
         webrtc.handleSignal(payload)
       })
-      .subscribe((status) => {
+      .on('presence', { event: 'sync' }, () => {
+        const state = channel.presenceState()
+        // Host memulai offer jika guest sudah hadir dan belum terhubung
+        if (store.role === 'host' && state.guest && !webrtc.connected.value) {
+          webrtc.makeOffer().catch(() => {})
+        }
+      })
+      .subscribe(async (status) => {
         if (status === 'SUBSCRIBED') {
+          try {
+            await channel.track({ role: store.role, name: store.displayName })
+          } catch (e) { /* ignore */ }
           // Beri tahu peer bahwa kita bergabung
           webrtc.announceJoin()
         }

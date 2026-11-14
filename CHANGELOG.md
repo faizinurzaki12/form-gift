@@ -8,6 +8,11 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 1.6.0 - 2026-11-14
+- Fix: Bug WebRTC 2 orang (presence sync + signaling + fallback).
+- Fix: Binding video remote & watch.
+- Test: Build dan unit test lulus.
+
 ## 1.5.0 - 2026-11-14
 - Fix: Bug mode column (fallback + panduan SQL alter table).
 - Fix: 404 manifest.webmanifest (tambah manifest + link).
