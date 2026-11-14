@@ -18,9 +18,8 @@ Setelah selesai, kamu mendapat link unik yang bisa dikirim ke teman atau pacar. 
 4. Bagikan link ke penerima.
 
 ## Teknologi
-- Bun + Vue 3 + Vite
-- Supabase (database, storage, realtime)
-- YouTube API (opsional, untuk musik)
+- Bun js
+- Supabase 
 
 ## Setup (Developer)
 ```bash
@@ -29,9 +28,3 @@ cp .env.example .env
 # isi .env dengan Supabase URL & anon key
 bun run dev
 ```
-
-## Struktur
-Lihat `Agent.md`.
-
-## Lisensi
-Open source — bebas digunakan & dimodifikasi.
