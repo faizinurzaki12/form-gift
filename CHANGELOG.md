@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 1.8.1 - 2026-11-14
+- Fix: Verifikasi flow solo photobooth (kamera auto-start, ambil foto, custom).
+- Test: Build dan unit test lulus.
+
 ## 1.8.0 - 2026-11-14
 - Feat: Update 2 - host kontrol layout/capture; guest menunggu; sync settings/capture.
 - Feat: Solo photobooth langsung pilih layout & foto.
