@@ -1,6 +1,8 @@
 <template>
   <section class="page-container">
     <BrutalButton variant="ghost" @click="$router.push('/')" style="margin-bottom:12px;">← Kembali</BrutalButton>
+    <!-- Latar animasi p5.js (celebration) -->
+    <div ref="celebRef" class="celeb-bg"></div>
     <div v-if="loading" class="squircle-card">Memuat hadiah...</div>
     <div v-else-if="error" class="squircle-card">
       <p class="error-text">{{ error }}</p>
@@ -33,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { getGiftById } from '../../services/supabase/gifts.repository.js'
 import BirthdayCake from '../../components/cake/BirthdayCake.vue'
@@ -48,6 +50,47 @@ const accentColor = computed(() => {
   if (gift.value?.type === 'friend-greeting') return 'var(--color-green)'
   if (gift.value?.type === 'lover-greeting') return 'var(--color-pink)'
   return 'var(--color-yellow)'
+})
+
+const celebRef = ref(null)
+let p5Instance = null
+
+onMounted(() => {
+  // Animasi celebration p5.js
+  if (typeof window !== 'undefined' && window.p5 && celebRef.value) {
+    const sketch = (p) => {
+      const confetti = []
+      p.setup = () => {
+        const c = p.createCanvas(window.innerWidth, 260)
+        c.parent(celebRef.value)
+        for (let i = 0; i < 60; i++) {
+          confetti.push({
+            x: p.random(p.width),
+            y: p.random(-100, 0),
+            r: p.random(4, 8),
+            vy: p.random(1, 3),
+            c: p.color(p.random(200, 255), p.random(100, 220), p.random(120, 255)),
+          })
+        }
+      }
+      p.draw = () => {
+        p.clear()
+        confetti.forEach((cf) => {
+          cf.y += cf.vy
+          if (cf.y > p.height) cf.y = p.random(-50, 0)
+          p.noStroke()
+          p.fill(cf.c)
+          p.circle(cf.x, cf.y, cf.r * 2)
+        })
+      }
+      p.windowResized = () => p.resizeCanvas(window.innerWidth, 260)
+    }
+    p5Instance = new window.p5(sketch)
+  }
+})
+
+onUnmounted(() => {
+  if (p5Instance) p5Instance.remove()
 })
 
 onMounted(async () => {
@@ -96,4 +139,20 @@ onMounted(async () => {
   margin-right: auto;
 }
 .error-text { color: var(--color-pink); font-weight: 600; }
+
+.celeb-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 260px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.gift-view {
+  position: relative;
+  z-index: 1;
+}
 </style>
