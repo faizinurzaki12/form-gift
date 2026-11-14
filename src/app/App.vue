@@ -78,7 +78,7 @@ onUnmounted(() => {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 0.45;
 }
 
 .app-shell {

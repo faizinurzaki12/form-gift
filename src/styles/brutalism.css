@@ -161,3 +161,8 @@
   .page-container { padding: var(--space-3); }
   .home-hero h1 { font-size: 1.5rem; }
 }
+
+@media (max-width: 480px) {
+  .code-row { flex-direction: column; align-items: stretch; }
+  .code-row .brutal-btn { width: 100%; }
+}

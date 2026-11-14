@@ -3,33 +3,33 @@
     <BrutalButton variant="ghost" @click="$router.push('/')" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <!-- Latar animasi p5.js (celebration) -->
     <div ref="celebRef" class="celeb-bg"></div>
-    <div v-if="loading" class="squircle-card">Memuat hadiah...</div>
-    <div v-else-if="error" class="squircle-card">
+    <SquircleCard v-if="loading">Memuat hadiah...</SquircleCard>
+    <SquircleCard v-else-if="error">
       <p class="error-text">{{ error }}</p>
-    </div>
+    </SquircleCard>
     <div v-else-if="gift" class="gift-view">
       <!-- Ucapan sahabat / pacar / surat cinta -->
-      <div v-if="gift.type === 'friend-greeting' || gift.type === 'lover-greeting'" class="squircle-card greeting-card anim-pop" :style="{ backgroundColor: accentColor }">
+      <SquircleCard v-if="gift.type === 'friend-greeting' || gift.type === 'lover-greeting'" class="greeting-card anim-pop" :style="{ backgroundColor: accentColor }">
         <h1>Hai, {{ gift.recipient_name }}! 🎉</h1>
         <p class="greeting-from">Dari: {{ gift.sender_name }}</p>
         <p class="greeting-message">{{ gift.message }}</p>
         <img v-if="gift.image_url" :src="gift.image_url" alt="Foto" class="greeting-image" />
-      </div>
+      </SquircleCard>
 
-      <div v-else-if="gift.type === 'love-letter'" class="squircle-card letter-card anim-pop">
+      <SquircleCard v-else-if="gift.type === 'love-letter'" class="letter-card anim-pop">
         <h1>💌 Surat Cinta</h1>
         <p class="letter-to">Untuk: {{ gift.recipient_name }}</p>
         <p class="letter-from">Dari: {{ gift.sender_name }}</p>
         <div class="letter-body">{{ gift.message }}</div>
         <img v-if="gift.image_url" :src="gift.image_url" alt="Foto" class="letter-image" />
-      </div>
+      </SquircleCard>
 
       <!-- Kue ulang tahun -->
       <BirthdayCake v-else-if="gift.type === 'birthday-cake'" :gift="gift" />
 
-      <div v-else class="squircle-card">
+      <SquircleCard v-else>
         <p>Jenis hadiah tidak dikenal.</p>
-      </div>
+      </SquircleCard>
     </div>
   </section>
 </template>
@@ -40,6 +40,7 @@ import { useRoute } from 'vue-router'
 import { getGiftById } from '../../services/supabase/gifts.repository.js'
 import BirthdayCake from '../../components/cake/BirthdayCake.vue'
 import BrutalButton from '../../components/ui/BrutalButton.vue'
+import SquircleCard from '../../components/ui/SquircleCard.vue'
 
 const route = useRoute()
 const gift = ref(null)
@@ -148,7 +149,7 @@ onMounted(async () => {
   height: 260px;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.7;
+  opacity: 0.45;
 }
 
 .gift-view {
