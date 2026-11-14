@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.8.0 - 2026-11-15
+
+- Feat: Ganti favicon bawaan Vue dengan `src/assets/favicon.png` (disalin ke `public/favicon.png`).
+- Feat: Manifest PWA memakai ikon PNG baru + `apple-touch-icon`.
+- Test: Build dan unit test lulus.
+
 ## 2.7.0 - 2026-11-15
 
 - Docs: Deskripsi project versi orang awam di README.md (fitur, cara pakai, teknologi, setup).
