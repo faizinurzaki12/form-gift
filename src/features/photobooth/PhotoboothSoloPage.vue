@@ -67,6 +67,13 @@
         >
           Lanjut Foto
         </BrutalButton>
+        <BrutalButton
+          v-if="store.photos.length > 0 && store.photos.length <= requiredCount"
+          @click="retakeLast"
+          variant="ghost"
+        >
+          Ambil Ulang
+        </BrutalButton>
         <span class="photo-progress">Foto: {{ store.photos.length }} / {{ requiredCount }}</span>
       </div>
 
@@ -145,10 +152,21 @@ async function handleCapture() {
     }
     const dataUrl = camera.capture()
     if (dataUrl) store.addPhoto(dataUrl)
+    // Setelah jumlah foto terpenuhi, kamera otomatis mati
+    if (store.photos.length >= requiredCount.value) {
+      camera.stop()
+    }
   } finally {
     cameraBusy.value = false
     countdown.value = 0
   }
+}
+
+async function retakeLast() {
+  if (!store.photos.length) return
+  store.photos.pop()
+  showEditor.value = false
+  await startCamera()
 }
 
 function goBack() {

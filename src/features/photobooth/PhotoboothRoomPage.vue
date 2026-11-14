@@ -79,6 +79,13 @@
             >
               {{ cameraBusy ? '...' : 'Ambil Foto' }}
             </BrutalButton>
+            <BrutalButton
+              v-if="store.photos.length > 0"
+              @click="retakeLast"
+              variant="ghost"
+            >
+              Ambil Ulang
+            </BrutalButton>
           </template>
           <template v-else>
             <BrutalButton disabled variant="secondary">Menunggu host...</BrutalButton>
@@ -246,6 +253,10 @@ async function runCapture(seconds) {
       store.addPhoto(dataUrl)
       broadcast(channel, 'photo', { dataUrl, takenBy: store.displayName })
     }
+    // Setelah foto lengkap, kamera otomatis mati
+    if (store.photos.length >= requiredCount.value) {
+      camera.stop()
+    }
   } finally {
     cameraBusy.value = false
     countdown.value = 0
@@ -256,6 +267,12 @@ async function triggerCapture() {
   if (store.role !== 'host') return
   broadcast(channel, 'capture', { seconds: store.timerSeconds })
   await runCapture(store.timerSeconds)
+}
+
+async function retakeLast() {
+  if (!store.photos.length) return
+  store.photos.pop()
+  await camera.start('user')
 }
 
 function goBack() {

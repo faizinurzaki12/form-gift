@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 2.6.0 - 2026-11-14
+- Feat: Update 6 - kamera auto-mati + ambil ulang di photobooth.
+- Test: Build dan unit test lulus.
+
 ## 2.5.0 - 2026-11-14
 - Feat: Tampilan - squircle cards, p5js, image compression, tests.
 - Test: Build dan unit test lulus (4 tests).
