@@ -1,0 +1,75 @@
+/* ============================================================
+   Base Styles — reset & global
+   ============================================================ */
+
+/* Reset ringan agar konsisten di semua browser */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #app {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Heading memakai font display (bold, brutal) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* Link default */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Gambar & media */
+img, video, canvas {
+  max-width: 100%;
+  display: block;
+}
+
+/* Tombol dasar (komponen BrutalButton akan override) */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Input dasar */
+input, textarea, select {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Fokus aksesibilitas: outline tebal ala brutalism */
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Utilitas kecil */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

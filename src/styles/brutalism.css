@@ -1,0 +1,105 @@
+/* ============================================================
+   New Brutalism Utilities
+   Kelas bantu untuk card, button, input, badge (squircle)
+   ============================================================ */
+
+/* Card squircle dengan border tebal & hard shadow */
+.brutal-card {
+  background-color: #FFFFFF;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-squircle);
+  box-shadow: var(--shadow-brutal);
+  padding: var(--space-6);
+}
+
+/* Button brutal: tebal, shadow, hover geser */
+.brutal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 20px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--color-ink);
+  background-color: var(--color-yellow);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-squircle);
+  box-shadow: var(--shadow-brutal-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  user-select: none;
+}
+
+.brutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--color-ink);
+}
+
+.brutal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 var(--color-ink);
+}
+
+.brutal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Input brutal */
+.brutal-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  color: var(--color-ink);
+  background-color: #FFFFFF;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-squircle);
+  box-shadow: var(--shadow-brutal-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.brutal-input:focus {
+  outline: none;
+  box-shadow: var(--shadow-brutal);
+}
+
+/* Badge */
+.brutal-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-family: var(--font-display);
+  background-color: var(--color-pink);
+  color: #FFFFFF;
+  border: 2px solid var(--color-border);
+  border-radius: 999px;
+}
+
+/* Squircle helper (corner-shape bila didukung) */
+.squircle {
+  border-radius: var(--radius-squircle);
+  /* corner-shape adalah fitur baru; fallback ke border-radius di atas */
+  corner-shape: squircle;
+}
+
+/* Container utama halaman */
+.page-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
+
+/* Grid responsif sederhana */
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+@media (max-width: 720px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
