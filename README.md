@@ -1,38 +1,37 @@
-# Birthday Surprise
+# Birthday Surprise 🎂
 
-Website hadiah ulang tahun (inspirasi alur gifft.me, desain original New Brutalism + Squircle).
+**Birthday Surprise** adalah website untuk membuat hadiah ulang tahun digital yang bisa dibagikan lewat link.
+Kamu bisa memilih jenis hadiah, menulis pesan, menambahkan foto, dan bahkan menambahkan musik.
+Setelah selesai, kamu mendapat link unik yang bisa dikirim ke teman atau pacar. Saat mereka membuka link, mereka akan melihat kejutan interaktif.
 
-## Tech Stack
-- Bun (runtime)
-- Vue 3.5 (JavaScript murni)
-- Vite
-- Supabase (Postgres + Storage + Realtime)
+## Fitur Utama
+- 🤝 **Ucapan ke Sahabat** — kartu ucapan hangat.
+- 💖 **Ucapan ke Pacar** — ucapan manis untuk pasangan.
+- 💌 **Surat Cinta** — surat digital dengan foto.
+- 🎂 **Kue Ulang Tahun** — kue virtual dengan lilin yang bisa "ditiup" (tap balon) + musik YouTube.
+- 📸 **Photobooth** — foto bersama via kode ruangan (solo atau 2 orang real-time).
 
-## Cara Menjalankan
+## Cara Pakai
+1. Buka website, pilih jenis hadiah.
+2. Isi nama penerima & pengirim, tulis pesan, (opsional) tambah foto/musik.
+3. Klik "Kirim" → dapat link berbagi.
+4. Bagikan link ke penerima.
+
+## Teknologi
+- Bun + Vue 3 + Vite
+- Supabase (database, storage, realtime)
+- YouTube API (opsional, untuk musik)
+
+## Setup (Developer)
 ```bash
 bun install
 cp .env.example .env
-# isi .env dengan URL & anon key Supabase
+# isi .env dengan Supabase URL & anon key
 bun run dev
 ```
-
-## Setup Supabase
-1. Buat project Supabase.
-2. Jalankan `sql/schema.sql` di SQL Editor.
-3. Isi `.env` dengan `VITE_SUPABASE_URL` dan `VITE_SUPABASE_ANON_KEY`.
-4. (Opsional) YouTube API key di `VITE_YOUTUBE_API_KEY`.
-
-## Cara Membuat YouTube API Key
-1. Buka https://console.cloud.google.com/
-2. Buat project baru (atau pilih yang ada).
-3. Menu **APIs & Services → Library**, cari **YouTube Data API v3**, klik **Enable**.
-4. Menu **APIs & Services → Credentials → Create Credentials → API key**.
-5. (Disarankan) Klik **Restrict key**, pilih **HTTP referrers**, masukkan domain website kamu.
-6. Salin key ke `.env` sebagai `VITE_YOUTUBE_API_KEY`.
-
-Jika tidak diisi, fitur pencarian lagu dinonaktifkan; pengguna tetap bisa menempel link/ID YouTube.
 
 ## Struktur
 Lihat `Agent.md`.
 
-<!-- contributor check -->
+## Lisensi
+Open source — bebas digunakan & dimodifikasi.
