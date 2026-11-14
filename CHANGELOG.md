@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.5.0 - 2026-11-14
+- Feat: Penambahan halaman Photobooth Sendiri (solo) satu perangkat.
+- Feat: Lobby photobooth menampilkan pilihan Sendiri, Buat Ruangan, Masuk Ruangan.
+- Feat: Penyimpanan mode room (single/two) pada create/join/store.
+- Fix: Penambahan tombol kembali di halaman strip photobooth.
+- Docs: Penambahan link pembuatan YouTube API key di .env.example.
+- Test: Build dan unit test lulus.
+
 ## 1.4.0 - 2026-11-14
 - Feat: Photobooth 2 type (solo & 2 orang real-time), ref beautyplus & NEAMOR.
 - Fix: Back button ke halaman utama.

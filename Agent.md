@@ -70,8 +70,12 @@ Prinsip: pemisahan UI (components), logic (composables), data (services/reposito
 - `/create/:type` — Form pembuatan hadiah
 - `/gift/:id` — Halaman penerima (surprise experience)
 - `/my-gifts` — Daftar hadiah (dari localStorage)
-- `/photobooth` — Lobby (buat/join room)
-- `/photobooth/room/:code` — Ruangan photobooth
+- `/photobooth` — Lobby (pilih mode: sendiri / buat / join)
+- `/photobooth/solo` — Photobooth sendiri (satu perangkat)
+- `/photobooth/create` — Buat ruangan (2 orang)
+- `/photobooth/join` — Masuk ruangan (2 orang)
+- `/photobooth/room/:code` — Ruangan photobooth (2 orang)
+- `/photobooth/strip/:id` — Hasil strip photobooth
 
 ## 7. Skema Database (Supabase) — `sql/schema.sql`
 Tabel:
