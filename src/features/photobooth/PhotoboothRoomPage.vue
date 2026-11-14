@@ -13,7 +13,7 @@
     <template v-else>
       <!-- Pilih layout -->
       <div class="squircle-card" style="margin-bottom:16px;">
-        <h3>Layout Foto</h3>
+        <h3>Layout Foto ({{ store.role === 'host' ? 'Host' : 'Guest' }})</h3>
         <div class="layout-options">
           <button
             v-for="opt in layoutOptions"
@@ -22,7 +22,7 @@
             class="layout-btn"
             :class="{ 'layout-btn--active': store.layout === opt.value }"
             @click="store.layout = opt.value"
-            :disabled="store.photos.length > 0"
+            :disabled="store.role !== 'host' || store.photos.length > 0"
           >
             {{ opt.label }} ({{ opt.count }} foto)
           </button>
@@ -38,10 +38,12 @@
             class="timer-btn"
             :class="{ 'timer-btn--active': store.timerSeconds === t }"
             @click="store.timerSeconds = t"
+            :disabled="store.role !== 'host'"
           >
             {{ t === 0 ? 'Tanpa' : t + 's' }}
           </button>
         </div>
+        <p v-if="store.role !== 'host'" class="hint-text">Menunggu host mengatur & menangkap foto...</p>
       </div>
 
       <!-- Kamera -->
@@ -69,13 +71,18 @@
         <p v-if="camera.error" class="error-text">{{ camera.error }}</p>
 
         <div class="camera-actions">
-          <BrutalButton
-            @click="handleCapture"
-            :disabled="cameraBusy || store.photos.length >= requiredCount"
-            variant="danger"
-          >
-            {{ cameraBusy ? '...' : 'Ambil Foto' }}
-          </BrutalButton>
+          <template v-if="store.role === 'host'">
+            <BrutalButton
+              @click="triggerCapture"
+              :disabled="cameraBusy || store.photos.length >= requiredCount"
+              variant="danger"
+            >
+              {{ cameraBusy ? '...' : 'Ambil Foto' }}
+            </BrutalButton>
+          </template>
+          <template v-else>
+            <BrutalButton disabled variant="secondary">Menunggu host...</BrutalButton>
+          </template>
           <span class="photo-progress">Foto: {{ store.photos.length }} / {{ requiredCount }}</span>
         </div>
 
@@ -137,6 +144,13 @@ watch(remoteVideoRef, (el) => {
   }
 })
 
+// Host menyebarkan pengaturan layout/timer ke guest
+watch([() => store.layout, () => store.timerSeconds], () => {
+  if (store.role === 'host' && channel) {
+    broadcast(channel, 'settings', { layout: store.layout, timerSeconds: store.timerSeconds })
+  }
+})
+
 const cameraBusy = ref(false)
 const countdown = ref(0)
 const showEditor = ref(false)
@@ -169,6 +183,17 @@ onMounted(async () => {
       .on('broadcast', { event: 'photo' }, ({ payload }) => {
         if (payload?.dataUrl && !store.photos.includes(payload.dataUrl)) {
           store.addPhoto(payload.dataUrl)
+        }
+      })
+      .on('broadcast', { event: 'settings' }, ({ payload }) => {
+        if (store.role !== 'host' && payload) {
+          if (payload.layout) store.layout = payload.layout
+          if (typeof payload.timerSeconds === 'number') store.timerSeconds = payload.timerSeconds
+        }
+      })
+      .on('broadcast', { event: 'capture' }, ({ payload }) => {
+        if (store.role !== 'host') {
+          runCapture(payload?.seconds ?? store.timerSeconds)
         }
       })
       .on('broadcast', { event: 'status' }, ({ payload }) => {
@@ -204,12 +229,11 @@ onUnmounted(() => {
   if (channel) channel.unsubscribe()
 })
 
-async function handleCapture() {
+async function runCapture(seconds) {
   if (cameraBusy.value) return
   cameraBusy.value = true
   try {
-    // Timer countdown
-    const t = store.timerSeconds
+    const t = typeof seconds === 'number' ? seconds : store.timerSeconds
     if (t > 0) {
       for (let i = t; i > 0; i--) {
         countdown.value = i
@@ -226,6 +250,12 @@ async function handleCapture() {
     cameraBusy.value = false
     countdown.value = 0
   }
+}
+
+async function triggerCapture() {
+  if (store.role !== 'host') return
+  broadcast(channel, 'capture', { seconds: store.timerSeconds })
+  await runCapture(store.timerSeconds)
 }
 
 function goBack() {
