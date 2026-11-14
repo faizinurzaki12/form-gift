@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.0 - 2026-11-14
+- Feat: Penambahan responsivitas mobile (layout, grid, tombol, form).
+- Fix: Penyesuaian bentuk form (squircle) konsisten dengan button.
+- Test: Penambahan unit test util room code (lulus).
+- Docs: Update CHANGELOG.
+
 ## 1.0.0 - 2026-11-14
 - Feat: Inisialisasi proyek Birthday Surprise (Vue 3 + Vite + Bun).
 - Feat: Implementasi fitur hadiah: ucapan sahabat, ucapan pacar, surat cinta, kue ulang tahun (balon tap + musik YouTube).

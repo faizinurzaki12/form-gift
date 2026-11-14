@@ -102,4 +102,62 @@
 
 @media (max-width: 720px) {
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
+
+  /* Responsif mobile: padding & tipografi lebih kecil */
+  .page-container {
+    padding: var(--space-4);
+  }
+
+  .app-header {
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  .app-nav {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.4rem; }
+
+  .brutal-card, .squircle-card {
+    padding: var(--space-4);
+  }
+
+  .brutal-btn {
+    width: 100%;
+  }
+
+  .share-link {
+    flex-direction: column;
+  }
+
+  .share-link__input {
+    width: 100%;
+  }
+
+  .camera-video {
+    max-width: 100%;
+  }
+
+  .strip {
+    max-width: 100%;
+  }
+
+  .editor__actions {
+    flex-direction: column;
+  }
+
+  .balloon {
+    width: 36px;
+    height: 44px;
+  }
+}
+
+/* Layar sangat kecil */
+@media (max-width: 420px) {
+  .page-container { padding: var(--space-3); }
+  .home-hero h1 { font-size: 1.5rem; }
 }
