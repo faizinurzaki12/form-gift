@@ -34,3 +34,5 @@ Jika tidak diisi, fitur pencarian lagu dinonaktifkan; pengguna tetap bisa menemp
 
 ## Struktur
 Lihat `Agent.md`.
+
+<!-- contributor check -->
