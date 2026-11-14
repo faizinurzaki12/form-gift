@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 1.7.0 - 2026-11-14
+- Fix: Bug 406 photobooth_rooms (pakai maybeSingle).
+- Test: Build dan unit test lulus.
+
 ## 1.6.0 - 2026-11-14
 - Fix: Bug WebRTC 2 orang (presence sync + signaling + fallback).
 - Fix: Binding video remote & watch.
