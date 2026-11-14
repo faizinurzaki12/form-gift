@@ -1,5 +1,6 @@
 <template>
   <section class="page-container">
+    <BrutalButton variant="ghost" @click="$router.back()" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <h1>Photobooth 📸</h1>
     <p class="subtitle">Buat ruangan baru atau masuk dengan kode.</p>
 
@@ -21,6 +22,7 @@
 
 <script setup>
 import SquircleCard from '../../components/ui/SquircleCard.vue'
+import BrutalButton from '../../components/ui/BrutalButton.vue'
 import { deleteExpiredPhotos } from '../../services/supabase/photobooth.repository.js'
 deleteExpiredPhotos().catch(() => {})
 </script>

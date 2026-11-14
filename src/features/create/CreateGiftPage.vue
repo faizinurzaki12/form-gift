@@ -1,5 +1,6 @@
 <template>
   <section class="page-container">
+    <BrutalButton variant="ghost" @click="$router.back()" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <div class="create-header">
       <h1>Buat Hadiah</h1>
       <p class="create-subtitle">{{ subtitle }}</p>
@@ -38,6 +39,7 @@ import LoverGreetingForm from './forms/LoverGreetingForm.vue'
 import LoveLetterForm from './forms/LoveLetterForm.vue'
 import BirthdayCakeForm from './forms/BirthdayCakeForm.vue'
 import ShareLink from '../../components/gift/ShareLink.vue'
+import BrutalButton from '../../components/ui/BrutalButton.vue'
 import { createGift } from '../../services/supabase/gifts.repository.js'
 
 const route = useRoute()

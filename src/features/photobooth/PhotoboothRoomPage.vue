@@ -224,11 +224,16 @@ async function endSession() {
   border-radius: var(--radius-squircle);
   overflow: hidden;
   box-shadow: var(--shadow-brutal);
+  aspect-ratio: 4 / 3;       /* samakan bingkai dengan referensi */
+  max-width: 480px;
+  width: 100%;
+  background-color: #d9d3c8;
 }
+
 .camera-video {
   width: 100%;
-  max-width: 480px;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   transform: scaleX(-1);
 }
 .countdown-overlay {

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.2.0 - 2026-11-14
+- Feat: Penyesuaian Photobooth mengikuti referensi (bingkai 4:3, alur room).
+- Fix: Penambahan tombol kembali di setiap halaman terkait.
+- Test: Build dan unit test lulus.
+
 ## 1.1.0 - 2026-11-14
 - Feat: Penambahan responsivitas mobile (layout, grid, tombol, form).
 - Fix: Penyesuaian bentuk form (squircle) konsisten dengan button.

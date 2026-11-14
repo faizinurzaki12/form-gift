@@ -1,5 +1,6 @@
 <template>
   <section class="page-container">
+    <BrutalButton variant="ghost" @click="$router.back()" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <h1>Hadiah Saya</h1>
     <p class="subtitle">Daftar hadiah yang pernah kamu buat di perangkat ini.</p>
 
@@ -21,6 +22,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import SquircleCard from '../../components/ui/SquircleCard.vue'
+import BrutalButton from '../../components/ui/BrutalButton.vue'
 import { getGiftsByIds } from '../../services/supabase/gifts.repository.js'
 
 const gifts = ref([])

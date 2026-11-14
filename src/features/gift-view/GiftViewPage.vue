@@ -1,5 +1,6 @@
 <template>
   <section class="page-container">
+    <BrutalButton variant="ghost" @click="$router.back()" style="margin-bottom:12px;">← Kembali</BrutalButton>
     <div v-if="loading" class="squircle-card">Memuat hadiah...</div>
     <div v-else-if="error" class="squircle-card">
       <p class="error-text">{{ error }}</p>
@@ -36,6 +37,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { getGiftById } from '../../services/supabase/gifts.repository.js'
 import BirthdayCake from '../../components/cake/BirthdayCake.vue'
+import BrutalButton from '../../components/ui/BrutalButton.vue'
 
 const route = useRoute()
 const gift = ref(null)
