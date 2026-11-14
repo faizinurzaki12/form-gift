@@ -33,11 +33,12 @@ export async function getRoom(code) {
   const supabase = getSupabase()
   if (!supabase) throw new Error('Supabase belum terhubung.')
 
+  // Gunakan maybeSingle agar tidak melempar 406 saat room tidak ditemukan
   const { data, error } = await supabase
     .from('photobooth_rooms')
     .select('*')
     .eq('code', code)
-    .single()
+    .maybeSingle()
 
   if (error) throw error
   return data
