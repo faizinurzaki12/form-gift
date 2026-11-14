@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 2.3.0 - 2026-11-14
+- Feat: Update 5 - halaman index center & squircle cards.
+- Test: Build dan unit test lulus.
+
 ## 2.2.0 - 2026-11-14
 - Feat: Update 4 - p5.js celebration di halaman penerima + squircle cards.
 - Test: Build dan unit test lulus.

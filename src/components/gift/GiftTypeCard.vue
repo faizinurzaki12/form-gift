@@ -22,6 +22,7 @@ defineProps({
   display: block;
   text-decoration: none;
   color: var(--color-ink);
+  text-align: center;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
