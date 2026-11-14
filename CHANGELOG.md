@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.7.0 - 2026-11-15
+- Docs: Deskripsi project versi orang awam di README.md (fitur, cara pakai, teknologi, setup).
+- Docs: Catatan tugas terbaru di TASKS.md.
+- Test: Build dan unit test lulus.
+
 ## 1.5.1 - 2026-11-14
 - Feat: Penambahan halaman Photobooth Sendiri (solo) satu perangkat.
 - Feat: Lobby photobooth menampilkan pilihan Sendiri, Buat Ruangan, Masuk Ruangan.
