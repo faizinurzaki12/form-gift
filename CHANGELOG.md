@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 1.8.2 - 2026-11-14
+- Fix: Bug 5 solo (tombol lanjut foto & editor).
+- Test: Build dan unit test lulus.
+
 ## 1.8.1 - 2026-11-14
 - Fix: Verifikasi flow solo photobooth (kamera auto-start, ambil foto, custom).
 - Test: Build dan unit test lulus.

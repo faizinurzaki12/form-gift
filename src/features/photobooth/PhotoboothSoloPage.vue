@@ -56,6 +56,14 @@
           >
             {{ cameraBusy ? '...' : 'Ambil Foto' }}
           </BrutalButton>
+          <BrutalButton
+            v-if="store.photos.length < requiredCount"
+            @click="handleCapture"
+            :disabled="cameraBusy"
+            variant="secondary"
+          >
+            Lanjut Foto
+          </BrutalButton>
           <span class="photo-progress">Foto: {{ store.photos.length }} / {{ requiredCount }}</span>
         </div>
 
