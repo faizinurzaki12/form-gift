@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 2.4.0 - 2026-11-14
+- Fix: Bug 8 - foto menyesuaikan rasio (contain) + card squircle.
+- Test: Build dan unit test lulus.
+
 ## 2.3.0 - 2026-11-14
 - Feat: Update 5 - halaman index center & squircle cards.
 - Test: Build dan unit test lulus.

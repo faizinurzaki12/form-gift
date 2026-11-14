@@ -126,7 +126,7 @@ function confettiStyle(i) {
 .cake-image {
   max-width: 100%;
   max-height: 220px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: var(--radius-squircle);
   border: var(--border-width) solid var(--color-border);
   box-shadow: var(--shadow-brutal);

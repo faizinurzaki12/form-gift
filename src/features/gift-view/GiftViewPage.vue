@@ -133,7 +133,7 @@ onMounted(async () => {
   border: var(--border-width) solid var(--color-border);
   box-shadow: var(--shadow-brutal);
   max-height: 320px;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   margin-left: auto;
   margin-right: auto;

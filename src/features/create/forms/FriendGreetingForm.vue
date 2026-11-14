@@ -78,5 +78,6 @@ async function onSubmit() {
   border-radius: var(--radius-squircle);
   border: var(--border-width) solid var(--color-border);
   box-shadow: var(--shadow-brutal-sm);
+  object-fit: contain;
 }
 </style>
