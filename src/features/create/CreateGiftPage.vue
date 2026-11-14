@@ -68,7 +68,7 @@ const formData = ref({})
 const createdId = ref(null)
 const error = ref(null)
 
-const shareUrl = computed(() => `${window.location.origin}/gift/${createdId.value}`)
+const shareUrl = computed(() => `${window.location.origin}/#/gift/${createdId.value}`)
 
 // Simpan id hadiah ke localStorage (tanpa login)
 function saveMyGiftId(id) {

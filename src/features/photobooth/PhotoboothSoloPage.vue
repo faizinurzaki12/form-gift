@@ -6,87 +6,89 @@
       <p class="room-meta">Mode solo — satu perangkat, satu kamera</p>
     </div>
 
-    <template>
-      <!-- Pilih layout -->
-      <div class="squircle-card" style="margin-bottom:16px;">
-        <h3>Layout Foto</h3>
-        <div class="layout-options">
-          <button
-            v-for="opt in layoutOptions"
-            :key="opt.value"
-            type="button"
-            class="layout-btn"
-            :class="{ 'layout-btn--active': store.layout === opt.value }"
-            @click="store.layout = opt.value"
-            :disabled="store.photos.length > 0"
-          >
-            {{ opt.label }} ({{ opt.count }} foto)
-          </button>
-        </div>
+    <!-- Kamera di atas -->
+    <div class="squircle-card camera-card">
+      <div class="camera-preview solo">
+        <video ref="videoRef" autoplay playsinline muted class="camera-video"></video>
+        <div v-if="countdown > 0" class="countdown-overlay">{{ countdown }}</div>
+      </div>
+      <p v-if="camera.error || cameraError" class="error-text">{{ camera.error || cameraError }}</p>
+      <BrutalButton v-if="camera.error || cameraError" @click="startCamera" variant="secondary">Buka Kamera</BrutalButton>
+    </div>
 
-        <!-- Timer -->
-        <div class="timer-options">
-          <span>Timer:</span>
-          <button
-            v-for="t in [0, 3, 5, 10]"
-            :key="t"
-            type="button"
-            class="timer-btn"
-            :class="{ 'timer-btn--active': store.timerSeconds === t }"
-            @click="store.timerSeconds = t"
-          >
-            {{ t === 0 ? 'Tanpa' : t + 's' }}
-          </button>
-        </div>
+    <!-- Pilih layout -->
+    <div class="squircle-card" style="margin-top:16px;">
+      <h3>Layout Foto</h3>
+      <div class="layout-options">
+        <button
+          v-for="opt in layoutOptions"
+          :key="opt.value"
+          type="button"
+          class="layout-btn"
+          :class="{ 'layout-btn--active': store.layout === opt.value }"
+          @click="store.layout = opt.value"
+          :disabled="store.photos.length > 0"
+        >
+          {{ opt.label }} ({{ opt.count }} foto)
+        </button>
       </div>
 
-      <!-- Kamera solo -->
-      <div class="squircle-card camera-card">
-        <div class="camera-preview solo">
-          <video ref="videoRef" autoplay playsinline muted class="camera-video"></video>
-          <div v-if="countdown > 0" class="countdown-overlay">{{ countdown }}</div>
-        </div>
-        <p v-if="camera.error" class="error-text">{{ camera.error }}</p>
+      <!-- Timer -->
+      <div class="timer-options">
+        <span>Timer:</span>
+        <button
+          v-for="t in [0, 3, 5, 10]"
+          :key="t"
+          type="button"
+          class="timer-btn"
+          :class="{ 'timer-btn--active': store.timerSeconds === t }"
+          @click="store.timerSeconds = t"
+        >
+          {{ t === 0 ? 'Tanpa' : t + 's' }}
+        </button>
+      </div>
+    </div>
 
-        <div class="camera-actions">
-          <BrutalButton
-            @click="handleCapture"
-            :disabled="cameraBusy || store.photos.length >= requiredCount"
-            variant="danger"
-          >
-            {{ cameraBusy ? '...' : 'Ambil Foto' }}
-          </BrutalButton>
-          <BrutalButton
-            v-if="store.photos.length < requiredCount"
-            @click="handleCapture"
-            :disabled="cameraBusy"
-            variant="secondary"
-          >
-            Lanjut Foto
-          </BrutalButton>
-          <span class="photo-progress">Foto: {{ store.photos.length }} / {{ requiredCount }}</span>
-        </div>
-
-        <!-- Preview foto yang sudah diambil -->
-        <div class="photo-thumbs">
-          <img v-for="(p, i) in store.photos" :key="i" :src="p" alt="foto" />
-        </div>
+    <!-- Aksi -->
+    <div class="squircle-card camera-actions-card" style="margin-top:16px;">
+      <div class="camera-actions">
+        <BrutalButton
+          @click="handleCapture"
+          :disabled="cameraBusy || store.photos.length >= requiredCount"
+          variant="danger"
+        >
+          {{ cameraBusy ? '...' : 'Ambil Foto' }}
+        </BrutalButton>
+        <BrutalButton
+          v-if="store.photos.length < requiredCount"
+          @click="handleCapture"
+          :disabled="cameraBusy"
+          variant="secondary"
+        >
+          Lanjut Foto
+        </BrutalButton>
+        <span class="photo-progress">Foto: {{ store.photos.length }} / {{ requiredCount }}</span>
       </div>
 
-      <!-- Setelah jumlah terpenuhi -> editor -->
-      <div v-if="store.photos.length >= requiredCount" class="squircle-card" style="margin-top:16px;">
-        <h3>Foto lengkap! Lanjut custom.</h3>
-        <BrutalButton @click="showEditor = true" block>Lanjut ke Editor Custom</BrutalButton>
+      <div class="photo-thumbs">
+        <img v-for="(p, i) in store.photos" :key="i" :src="p" alt="foto" />
       </div>
+    </div>
 
-      <StripEditor v-if="showEditor" />
-    </template>
+    <!-- Lanjut editor -->
+    <div v-if="store.photos.length >= requiredCount" class="squircle-card" style="margin-top:16px;">
+      <h3>Foto lengkap! Lanjut custom.</h3>
+      <BrutalButton @click="showEditor = true" block>Lanjut ke Editor Custom</BrutalButton>
+    </div>
+
+    <StripEditor v-if="showEditor" />
   </section>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import SquircleCard from '../../components/ui/SquircleCard.vue'
 import BrutalButton from '../../components/ui/BrutalButton.vue'
 import { useCamera } from '../../composables/useCamera.js'
 import { usePhotoboothStore } from '../../stores/photobooth.store.js'
@@ -100,6 +102,7 @@ const videoRef = camera.videoRef
 const cameraBusy = ref(false)
 const countdown = ref(0)
 const showEditor = ref(false)
+const cameraError = ref('')
 
 const layoutOptions = [
   { value: '2-horizontal', label: '2 Foto Berdampingan', count: 2 },
@@ -115,12 +118,18 @@ const requiredCount = computed(() => {
 onMounted(async () => {
   store.reset()
   store.setMode('single')
-  await camera.start('user')
+  await startCamera()
 })
 
 onUnmounted(() => {
   camera.stop()
 })
+
+async function startCamera() {
+  cameraError.value = ''
+  await camera.start('user')
+  if (camera.error.value) cameraError.value = camera.error.value
+}
 
 async function handleCapture() {
   if (cameraBusy.value) return
@@ -176,7 +185,7 @@ function goBack() {
 .camera-card { text-align: center; }
 .camera-preview {
   position: relative;
-  display: inline-block;
+  display: block;
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius-squircle);
   overflow: hidden;
@@ -214,6 +223,7 @@ function goBack() {
   margin-top: var(--space-4);
   flex-wrap: wrap;
 }
+.camera-actions-card { text-align: center; }
 .photo-progress { font-family: var(--font-display); }
 .photo-thumbs {
   display: flex;

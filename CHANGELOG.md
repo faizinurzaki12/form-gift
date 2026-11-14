@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 1.9.0 - 2026-11-14
+- Feat: Perbaikan 2 - solo camera fix + layout neubrutalism + p5.js animasi.
+- Test: Build dan unit test lulus.
+
 ## 1.8.2 - 2026-11-14
 - Fix: Bug 5 solo (tombol lanjut foto & editor).
 - Test: Build dan unit test lulus.

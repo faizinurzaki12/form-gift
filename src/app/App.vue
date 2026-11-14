@@ -1,6 +1,9 @@
 <template>
   <!-- Shell utama aplikasi: navbar + router-view -->
   <div class="app-shell">
+    <!-- Latar animasi p5.js (UX) -->
+    <div ref="bgRef" class="app-bg"></div>
+
     <header class="app-header">
       <router-link to="/" class="app-logo">🎂 Birthday Surprise</router-link>
       <nav class="app-nav">
@@ -20,8 +23,69 @@
 </template>
 
 <script setup>
-// Tidak ada logic khusus di shell; navigasi ditangani Vue Router
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const bgRef = ref(null)
+let p5Instance = null
+
+onMounted(() => {
+  // Inisialisasi animasi p5.js bila library tersedia
+  if (typeof window !== 'undefined' && window.p5 && bgRef.value) {
+    const sketch = (p) => {
+      const particles = []
+      p.setup = () => {
+        const canvas = p.createCanvas(window.innerWidth, window.innerHeight)
+        canvas.parent(bgRef.value)
+        for (let i = 0; i < 40; i++) {
+          particles.push({
+            x: p.random(p.width),
+            y: p.random(p.height),
+            r: p.random(4, 12),
+            vx: p.random(-0.5, 0.5),
+            vy: p.random(-0.5, 0.5),
+            c: p.color(p.random(200, 255), p.random(100, 200), p.random(150, 255), 80),
+          })
+        }
+      }
+      p.draw = () => {
+        p.clear()
+        particles.forEach((pt) => {
+          pt.x += pt.vx
+          pt.y += pt.vy
+          if (pt.x < 0 || pt.x > p.width) pt.vx *= -1
+          if (pt.y < 0 || pt.y > p.height) pt.vy *= -1
+          p.noStroke()
+          p.fill(pt.c)
+          p.circle(pt.x, pt.y, pt.r * 2)
+        })
+      }
+      p.windowResized = () => {
+        p.resizeCanvas(window.innerWidth, window.innerHeight)
+      }
+    }
+    p5Instance = new window.p5(sketch)
+  }
+})
+
+onUnmounted(() => {
+  if (p5Instance) p5Instance.remove()
+})
 </script>
+
+<style scoped>
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+}
+</style>
 
 <style scoped>
 .app-shell {
