@@ -9,6 +9,7 @@
     <div class="field">
       <label class="field__label">Foto Kenangan (opsional)</label>
       <input type="file" accept="image/*" @change="onFile" />
+      <img v-if="imagePreview" :src="imagePreview" alt="preview" class="image-preview" />
     </div>
     <BrutalButton type="submit" :loading="uploading" block>Kirim Surat</BrutalButton>
   </form>
@@ -26,10 +27,13 @@ const recipientName = ref('')
 const senderName = ref('')
 const message = ref('')
 const imageFile = ref(null)
+const imagePreview = ref(null)
 const { uploading, upload } = useImageUpload()
 
 function onFile(e) {
   imageFile.value = e.target.files?.[0] || null
+  if (imageFile.value) imagePreview.value = URL.createObjectURL(imageFile.value)
+  else imagePreview.value = null
 }
 
 async function onSubmit() {
@@ -51,4 +55,11 @@ async function onSubmit() {
 .gift-form { display: flex; flex-direction: column; gap: var(--space-4); }
 .field { display: flex; flex-direction: column; gap: var(--space-2); }
 .field__label { font-family: var(--font-display); font-size: 0.9rem; }
+.image-preview {
+  margin-top: var(--space-2);
+  max-height: 160px;
+  border-radius: var(--radius-squircle);
+  border: var(--border-width) solid var(--color-border);
+  box-shadow: var(--shadow-brutal-sm);
+}
 </style>

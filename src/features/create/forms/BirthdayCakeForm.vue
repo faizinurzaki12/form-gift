@@ -22,6 +22,12 @@
       </select>
     </div>
 
+    <div class="field">
+      <label class="field__label">Foto (opsional)</label>
+      <input type="file" accept="image/*" @change="onFile" />
+      <img v-if="imagePreview" :src="imagePreview" alt="preview" class="image-preview" />
+    </div>
+
     <!-- Musik YouTube -->
     <div class="field">
       <label class="field__label">Musik Latar (YouTube)</label>
@@ -65,6 +71,7 @@ import { ref } from 'vue'
 import BrutalInput from '../../../components/ui/BrutalInput.vue'
 import BrutalButton from '../../../components/ui/BrutalButton.vue'
 import { useYouTubeSearch } from '../../../composables/useYouTubeSearch.js'
+import { useImageUpload } from '../../../composables/useImageUpload.js'
 
 const emit = defineEmits(['submit'])
 
@@ -73,12 +80,21 @@ const senderName = ref('')
 const message = ref('')
 const candleCount = ref(5)
 const cakeStyle = ref('classic')
+const imageFile = ref(null)
+const imagePreview = ref(null)
+const { uploading: imageUploading, upload: uploadImage } = useImageUpload()
 
 const searchQuery = ref('')
 const pasteLink = ref('')
 const selectedVideoId = ref(null)
 
 const yt = useYouTubeSearch()
+
+function onFile(e) {
+  imageFile.value = e.target.files?.[0] || null
+  if (imageFile.value) imagePreview.value = URL.createObjectURL(imageFile.value)
+  else imagePreview.value = null
+}
 
 async function doSearch() {
   await yt.search(searchQuery.value)
@@ -93,12 +109,16 @@ function applyPaste() {
   if (id) selectedVideoId.value = id
 }
 
-function onSubmit() {
+async function onSubmit() {
+  let imageUrl = null
+  if (imageFile.value) imageUrl = await uploadImage(imageFile.value)
+
   emit('submit', {
     type: 'birthday-cake',
     recipient_name: recipientName.value,
     sender_name: senderName.value,
     message: message.value,
+    image_url: imageUrl,
     title: 'Kue Ulang Tahun',
     cake_config: {
       candles: candleCount.value,
@@ -146,4 +166,11 @@ function onSubmit() {
 .search-result__channel { font-size: 0.75rem; opacity: 0.7; }
 .selected-video { font-size: 0.85rem; font-weight: 600; }
 .error-text { color: var(--color-pink); font-weight: 600; }
+.image-preview {
+  margin-top: var(--space-2);
+  max-height: 160px;
+  border-radius: var(--radius-squircle);
+  border: var(--border-width) solid var(--color-border);
+  box-shadow: var(--shadow-brutal-sm);
+}
 </style>

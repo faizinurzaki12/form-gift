@@ -2,6 +2,7 @@
   <div class="cake-view squircle-card anim-pop">
     <h1>🎂 Selamat Ulang Tahun, {{ gift.recipient_name }}!</h1>
     <p class="cake-from">Dari: {{ gift.sender_name }}</p>
+    <img v-if="gift.image_url" :src="gift.image_url" alt="Foto" class="cake-image" />
 
     <!-- Balon yang bisa di-tap -->
     <div class="balloons">
@@ -121,6 +122,16 @@ function confettiStyle(i) {
 }
 
 .cake-from { opacity: 0.8; margin-bottom: var(--space-4); }
+
+.cake-image {
+  max-width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius-squircle);
+  border: var(--border-width) solid var(--color-border);
+  box-shadow: var(--shadow-brutal);
+  margin-bottom: var(--space-4);
+}
 
 .balloons {
   position: relative;

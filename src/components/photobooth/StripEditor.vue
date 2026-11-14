@@ -247,7 +247,7 @@ async function saveToSupabase() {
     const publicUrl = await uploadFile('photobooth', path, file)
     const record = await saveStrip(store.roomCode, path, publicUrl, store.customization)
     if (record?.id) {
-      saveLink.value = `${window.location.origin}/#/photobooth/strip/${record.id}`
+      saveLink.value = `${window.location.origin}/photobooth/strip/${record.id}`
     }
   } catch (e) {
     error.value = e.message || 'Gagal menyimpan ke Supabase.'

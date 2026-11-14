@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 2.0.0 - 2026-11-14
+- Feat: Update 3 - p5.js animasi, preview foto di form, URL tanpa hash (history + vercel rewrite).
+- Test: Build dan unit test lulus.
+
 ## 1.9.0 - 2026-11-14
 - Feat: Perbaikan 2 - solo camera fix + layout neubrutalism + p5.js animasi.
 - Test: Build dan unit test lulus.
