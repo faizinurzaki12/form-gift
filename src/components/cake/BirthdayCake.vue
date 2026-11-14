@@ -130,7 +130,8 @@ function confettiStyle(i) {
   border-radius: var(--radius-squircle);
   border: var(--border-width) solid var(--color-border);
   box-shadow: var(--shadow-brutal);
-  margin-bottom: var(--space-4);
+  margin: 0 auto var(--space-4);
+  display: block;
 }
 
 .balloons {

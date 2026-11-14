@@ -91,6 +91,9 @@ onMounted(async () => {
   box-shadow: var(--shadow-brutal);
   max-height: 320px;
   object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .error-text { color: var(--color-pink); font-weight: 600; }
 </style>

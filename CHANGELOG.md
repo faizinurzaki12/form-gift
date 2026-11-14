@@ -8,6 +8,10 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 2.1.0 - 2026-11-14
+- Fix: Bug 7 - foto center, netlify.toml, p5js lebih terlihat, report.
+- Test: Build dan unit test lulus.
+
 ## 2.0.0 - 2026-11-14
 - Feat: Update 3 - p5.js animasi, preview foto di form, URL tanpa hash (history + vercel rewrite).
 - Test: Build dan unit test lulus.

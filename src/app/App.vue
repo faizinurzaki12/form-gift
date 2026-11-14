@@ -40,10 +40,10 @@ onMounted(() => {
           particles.push({
             x: p.random(p.width),
             y: p.random(p.height),
-            r: p.random(4, 12),
-            vx: p.random(-0.5, 0.5),
-            vy: p.random(-0.5, 0.5),
-            c: p.color(p.random(200, 255), p.random(100, 200), p.random(150, 255), 80),
+            r: p.random(6, 16),
+            vx: p.random(-0.8, 0.8),
+            vy: p.random(-0.8, 0.8),
+            c: p.color(p.random(200, 255), p.random(100, 200), p.random(150, 255), 140),
           })
         }
       }
@@ -78,7 +78,7 @@ onUnmounted(() => {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.85;
 }
 
 .app-shell {
