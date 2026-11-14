@@ -1,11 +1,81 @@
 # CHANGELOG
 
 ## 2.7.0 - 2026-11-15
+
 - Docs: Deskripsi project versi orang awam di README.md (fitur, cara pakai, teknologi, setup).
 - Docs: Catatan tugas terbaru di TASKS.md.
 - Test: Build dan unit test lulus.
 
+## 2.6.0 - 2026-11-14
+
+- Feat: Update 6 - kamera auto-mati + ambil ulang di photobooth.
+- Test: Build dan unit test lulus.
+
+## 2.5.0 - 2026-11-14
+
+- Feat: Tampilan - squircle cards, p5js, image compression, tests.
+- Test: Build dan unit test lulus (4 tests).
+
+## 2.4.0 - 2026-11-14
+
+- Fix: Bug 8 - foto menyesuaikan rasio (contain) + card squircle.
+- Test: Build dan unit test lulus.
+
+## 2.3.0 - 2026-11-14
+
+- Feat: Update 5 - halaman index center & squircle cards.
+- Test: Build dan unit test lulus.
+
+## 2.2.0 - 2026-11-14
+
+- Feat: Update 4 - p5.js celebration di halaman penerima + squircle cards.
+- Test: Build dan unit test lulus.
+
+## 2.1.0 - 2026-11-14
+
+- Fix: Bug 7 - foto center, netlify.toml, p5js lebih terlihat, report.
+- Test: Build dan unit test lulus.
+
+## 2.0.0 - 2026-11-14
+
+- Feat: Update 3 - p5.js animasi, preview foto di form, URL tanpa hash (history + vercel rewrite).
+- Test: Build dan unit test lulus.
+
+## 1.9.0 - 2026-11-14
+
+- Feat: Perbaikan 2 - solo camera fix + layout neubrutalism + p5.js animasi.
+- Test: Build dan unit test lulus.
+
+## 1.8.2 - 2026-11-14
+
+- Fix: Bug 5 solo (tombol lanjut foto & editor).
+- Test: Build dan unit test lulus.
+
+## 1.8.1 - 2026-11-14
+
+- Fix: Verifikasi flow solo photobooth (kamera auto-start, ambil foto, custom).
+- Test: Build dan unit test lulus.
+
+## 1.8.0 - 2026-11-14
+
+- Feat: Update 2 - host kontrol layout/capture; guest menunggu; sync settings/capture.
+- Feat: Solo photobooth langsung pilih layout & foto.
+- Fix: Widen input kode ruangan + tombol Refresh.
+- Test: Build dan unit test lulus.
+
+## 1.7.0 - 2026-11-14
+
+- Fix: Bug 406 photobooth_rooms (pakai maybeSingle).
+- Test: Build dan unit test lulus.
+
+## 1.6.0 - 2026-11-14
+
+- Fix: Bug WebRTC 2 orang (presence sync + signaling + fallback).
+- Fix: Binding video remote & watch.
+- Test: Build dan unit test lulus.
+
 ## 1.5.1 - 2026-11-14
+
 - Feat: Penambahan halaman Photobooth Sendiri (solo) satu perangkat.
 - Feat: Lobby photobooth menampilkan pilihan Sendiri, Buat Ruangan, Masuk Ruangan.
 - Feat: Penyimpanan mode room (single/two) pada create/join/store.
@@ -13,89 +83,40 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
-## 2.6.0 - 2026-11-14
-- Feat: Update 6 - kamera auto-mati + ambil ulang di photobooth.
-- Test: Build dan unit test lulus.
-
-## 2.5.0 - 2026-11-14
-- Feat: Tampilan - squircle cards, p5js, image compression, tests.
-- Test: Build dan unit test lulus (4 tests).
-
-## 2.4.0 - 2026-11-14
-- Fix: Bug 8 - foto menyesuaikan rasio (contain) + card squircle.
-- Test: Build dan unit test lulus.
-
-## 2.3.0 - 2026-11-14
-- Feat: Update 5 - halaman index center & squircle cards.
-- Test: Build dan unit test lulus.
-
-## 2.2.0 - 2026-11-14
-- Feat: Update 4 - p5.js celebration di halaman penerima + squircle cards.
-- Test: Build dan unit test lulus.
-
-## 2.1.0 - 2026-11-14
-- Fix: Bug 7 - foto center, netlify.toml, p5js lebih terlihat, report.
-- Test: Build dan unit test lulus.
-
-## 2.0.0 - 2026-11-14
-- Feat: Update 3 - p5.js animasi, preview foto di form, URL tanpa hash (history + vercel rewrite).
-- Test: Build dan unit test lulus.
-
-## 1.9.0 - 2026-11-14
-- Feat: Perbaikan 2 - solo camera fix + layout neubrutalism + p5.js animasi.
-- Test: Build dan unit test lulus.
-
-## 1.8.2 - 2026-11-14
-- Fix: Bug 5 solo (tombol lanjut foto & editor).
-- Test: Build dan unit test lulus.
-
-## 1.8.1 - 2026-11-14
-- Fix: Verifikasi flow solo photobooth (kamera auto-start, ambil foto, custom).
-- Test: Build dan unit test lulus.
-
-## 1.8.0 - 2026-11-14
-- Feat: Update 2 - host kontrol layout/capture; guest menunggu; sync settings/capture.
-- Feat: Solo photobooth langsung pilih layout & foto.
-- Fix: Widen input kode ruangan + tombol Refresh.
-- Test: Build dan unit test lulus.
-
-## 1.7.0 - 2026-11-14
-- Fix: Bug 406 photobooth_rooms (pakai maybeSingle).
-- Test: Build dan unit test lulus.
-
-## 1.6.0 - 2026-11-14
-- Fix: Bug WebRTC 2 orang (presence sync + signaling + fallback).
-- Fix: Binding video remote & watch.
-- Test: Build dan unit test lulus.
-
 ## 1.5.0 - 2026-11-14
+
 - Fix: Bug mode column (fallback + panduan SQL alter table).
 - Fix: 404 manifest.webmanifest (tambah manifest + link).
 - Feat: Custom photobooth ala beautyplus (frame presets + filter foto).
 - Test: Build dan unit test lulus.
 
 ## 1.4.0 - 2026-11-14
+
 - Feat: Photobooth 2 type (solo & 2 orang real-time), ref beautyplus & NEAMOR.
 - Fix: Back button ke halaman utama.
 - Test: Build dan unit test lulus.
 
 ## 1.3.0 - 2026-11-14
+
 - Fix: Bug tombol kembali di photobooth (kini ke halaman utama).
 - Feat: Waiting room + 2 kamera + WebRTC live preview + capture sinkron.
 - Test: Build dan unit test lulus.
 
 ## 1.2.0 - 2026-11-14
+
 - Feat: Penyesuaian Photobooth mengikuti referensi (bingkai 4:3, alur room).
 - Fix: Penambahan tombol kembali di setiap halaman terkait.
 - Test: Build dan unit test lulus.
 
 ## 1.1.0 - 2026-11-14
+
 - Feat: Penambahan responsivitas mobile (layout, grid, tombol, form).
 - Fix: Penyesuaian bentuk form (squircle) konsisten dengan button.
 - Test: Penambahan unit test util room code (lulus).
 - Docs: Update CHANGELOG.
 
 ## 1.0.0 - 2026-11-14
+
 - Feat: Inisialisasi proyek Birthday Surprise (Vue 3 + Vite + Bun).
 - Feat: Implementasi fitur hadiah: ucapan sahabat, ucapan pacar, surat cinta, kue ulang tahun (balon tap + musik YouTube).
 - Feat: Implementasi Photobooth berbasis kode ruangan (host/guest, timer, layout 2/2x2/3x3, editor custom).
