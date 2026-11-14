@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Birthday Surprise">
+  <!-- Ikon orisinal Birthday Surprise (dibuat sendiri, bukan aset pihak lain) -->
+  <!-- Latar squircle kuning dengan garis hitam tebal (New Brutalism) -->
+  <rect x="2" y="2" width="60" height="60" rx="18" fill="#FFD93D" stroke="#1A1A1A" stroke-width="4" />
+
+  <!-- Badan kue (pink) -->
+  <rect x="12" y="36" width="40" height="18" rx="6" fill="#FF6B9D" stroke="#1A1A1A" stroke-width="4" />
+
+  <!-- Lapisan krim di atas kue (cream) -->
+  <rect x="12" y="29" width="40" height="11" rx="5" fill="#FFF7EC" stroke="#1A1A1A" stroke-width="4" />
+
+  <!-- Tiga lilin biru -->
+  <rect x="20" y="18" width="4" height="13" rx="2" fill="#4D96FF" stroke="#1A1A1A" stroke-width="2.5" />
+  <rect x="30" y="18" width="4" height="13" rx="2" fill="#4D96FF" stroke="#1A1A1A" stroke-width="2.5" />
+  <rect x="40" y="18" width="4" height="13" rx="2" fill="#4D96FF" stroke="#1A1A1A" stroke-width="2.5" />
+
+  <!-- Api lilin (oranye) -->
+  <ellipse cx="22" cy="13" rx="3.6" ry="5" fill="#FF9F43" stroke="#1A1A1A" stroke-width="2.5" />
+  <ellipse cx="32" cy="13" rx="3.6" ry="5" fill="#FF9F43" stroke="#1A1A1A" stroke-width="2.5" />
+  <ellipse cx="42" cy="13" rx="3.6" ry="5" fill="#FF9F43" stroke="#1A1A1A" stroke-width="2.5" />
+</svg>

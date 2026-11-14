@@ -21,3 +21,8 @@ pnpm-debug.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# File lokal yang tidak dipublikasikan ke repo
+sql/
+TASKS.md
+report.md

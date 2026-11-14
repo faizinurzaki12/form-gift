@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 2.11.0 - 2026-11-15
+
+- Fix: Favicon lama (gambar dari Google) dihapus dan diganti ikon orisinal (`src/assets/favicon.svg` + render PNG).
+- Fix: Nama situs referensi pada komentar kode & changelog dinetralkan.
+- Chore: `sql/`, `TASKS.md`, `report.md` tidak lagi disertakan di repo (ditambahkan ke `.gitignore`, tetap ada di lokal).
+- Test: Build dan unit test lulus.
+
+## 2.10.0 - 2026-11-15
+
+- Feat: Favicon orisinal baru (squircle kuning + kue + 3 lilin) dibuat sendiri dalam `src/assets/favicon.svg`.
+- Feat: `public/favicon.svg` + `public/favicon.png` (500x500, hasil render sendiri) menggantikan gambar dari Google Images.
+- Feat: `index.html` memakai SVG favicon + fallback PNG, manifest PWA mendukung SVG & PNG.
+- Docs: Risiko hak cipta favicon turun jadi rendah (aset orisinal) di `report.md`.
+
+## 2.9.0 - 2026-11-15
+
+- Docs: Pemeriksaan hak cipta terhadap gifft.me & NEAMOR (photo-booth-gen-z) dicatat di `report.md`.
+- Docs: Konfirmasi `favicon.png` berasal dari Google Images → tidak boleh dipakai, perlu diganti ikon orisinal.
+- Docs: Daftar sumber ikon yang aman (MIT/Apache/OFL/CC) ditambahkan di `report.md`.
+- Test: Tidak ada perubahan kode; unit test & build tetap lulus.
+
 ## 2.8.0 - 2026-11-15
 
 - Feat: Ganti favicon bawaan Vue dengan `src/assets/favicon.png` (disalin ke `public/favicon.png`).
@@ -93,12 +114,12 @@
 
 - Fix: Bug mode column (fallback + panduan SQL alter table).
 - Fix: 404 manifest.webmanifest (tambah manifest + link).
-- Feat: Custom photobooth ala beautyplus (frame presets + filter foto).
+- Feat: Custom photobooth (frame presets + filter foto).
 - Test: Build dan unit test lulus.
 
 ## 1.4.0 - 2026-11-14
 
-- Feat: Photobooth 2 type (solo & 2 orang real-time), ref beautyplus & NEAMOR.
+- Feat: Photobooth 2 tipe (solo & 2 orang real-time).
 - Fix: Back button ke halaman utama.
 - Test: Build dan unit test lulus.
 
