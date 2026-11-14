@@ -22,6 +22,7 @@ export const usePhotoboothStore = defineStore('photobooth', () => {
     stickers: [], // {id, src, x, y, size, rotation}
     title: '',
     footer: '',
+    filter: 'none', // none | grayscale | sepia | vintage | bright
   })
 
   function setRoom(code, roleValue, name) {

@@ -8,6 +8,12 @@
 - Docs: Penambahan link pembuatan YouTube API key di .env.example.
 - Test: Build dan unit test lulus.
 
+## 1.5.0 - 2026-11-14
+- Fix: Bug mode column (fallback + panduan SQL alter table).
+- Fix: 404 manifest.webmanifest (tambah manifest + link).
+- Feat: Custom photobooth ala beautyplus (frame presets + filter foto).
+- Test: Build dan unit test lulus.
+
 ## 1.4.0 - 2026-11-14
 - Feat: Photobooth 2 type (solo & 2 orang real-time), ref beautyplus & NEAMOR.
 - Fix: Back button ke halaman utama.

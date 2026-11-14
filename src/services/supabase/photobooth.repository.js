@@ -8,14 +8,24 @@ export async function createRoom(code, hostName, mode = 'single') {
   const supabase = getSupabase()
   if (!supabase) throw new Error('Supabase belum terhubung.')
 
-  const { data, error } = await supabase
+  // Coba insert dengan kolom mode. Jika kolom belum ada di DB (schema lama),
+  // ulangi tanpa mode agar tidak gagal total.
+  let result = await supabase
     .from('photobooth_rooms')
     .insert({ code, host_name: hostName, mode, status: 'waiting' })
     .select()
     .single()
 
-  if (error) throw error
-  return data
+  if (result.error && /mode/i.test(result.error.message || '')) {
+    result = await supabase
+      .from('photobooth_rooms')
+      .insert({ code, host_name: hostName, status: 'waiting' })
+      .select()
+      .single()
+  }
+
+  if (result.error) throw result.error
+  return result.data
 }
 
 // Ambil room berdasarkan kode

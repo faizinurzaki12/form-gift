@@ -24,7 +24,7 @@
             class="strip__photo"
             :style="{ borderRadius: store.customization.radius + 'px' }"
           >
-            <img :src="photo" alt="foto" />
+            <img :src="photo" alt="foto" :style="{ filter: filterCss }" />
           </div>
         </div>
 
@@ -78,6 +78,28 @@
       <div class="control">
         <label>Gap: {{ store.customization.gap }}px</label>
         <input type="range" min="0" max="24" v-model.number="store.customization.gap" />
+      </div>
+
+      <div class="control">
+        <label>Filter Foto</label>
+        <select v-model="store.customization.filter" class="brutal-input">
+          <option value="none">Normal</option>
+          <option value="grayscale">Hitam Putih</option>
+          <option value="sepia">Sepia</option>
+          <option value="vintage">Vintage</option>
+          <option value="bright">Cerah</option>
+        </select>
+      </div>
+
+      <div class="control">
+        <label>Frame Cepat</label>
+        <div class="frame-presets">
+          <button type="button" class="frame-preset" style="background:#FF6B9D" @click="setFrame('#FF6B9D','#1A1A1A')"></button>
+          <button type="button" class="frame-preset" style="background:#FFF7EC" @click="setFrame('#FFF7EC','#1A1A1A')"></button>
+          <button type="button" class="frame-preset" style="background:#6BCB77" @click="setFrame('#6BCB77','#1A1A1A')"></button>
+          <button type="button" class="frame-preset" style="background:#4D96FF" @click="setFrame('#4D96FF','#FFFFFF')"></button>
+          <button type="button" class="frame-preset" style="background:#1A1A1A" @click="setFrame('#1A1A1A','#FFFFFF')"></button>
+        </div>
       </div>
 
       <!-- Stiker picker -->
@@ -137,6 +159,21 @@ const stickerOptions = ['🧸', '🐰', '🐱', '🐶', '🐻', '🐼', '🦊', 
 
 const selectedStickerId = ref(null)
 const selectedSticker = computed(() => store.customization.stickers.find((s) => s.id === selectedStickerId.value) || null)
+
+const filterCss = computed(() => {
+  switch (store.customization.filter) {
+    case 'grayscale': return 'grayscale(1)'
+    case 'sepia': return 'sepia(0.8)'
+    case 'vintage': return 'sepia(0.4) contrast(1.1) brightness(0.9)'
+    case 'bright': return 'brightness(1.15) saturate(1.2)'
+    default: return 'none'
+  }
+})
+
+function setFrame(bg, border) {
+  store.customization.background = bg
+  store.customization.borderColor = border
+}
 
 function addSticker(emoji) {
   const id = 'stk-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6)
@@ -276,4 +313,13 @@ async function saveToSupabase() {
 .editor__actions { display: flex; gap: var(--space-3); flex-wrap: wrap; }
 .save-link { word-break: break-all; }
 .error-text { color: var(--color-pink); font-weight: 600; }
+
+.frame-presets { display: flex; gap: var(--space-2); }
+.frame-preset {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--color-border);
+  border-radius: 8px;
+  cursor: pointer;
+}
 </style>
