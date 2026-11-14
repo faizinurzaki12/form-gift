@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.5.0 - 2026-11-14
+## 1.5.1 - 2026-11-14
 - Feat: Penambahan halaman Photobooth Sendiri (solo) satu perangkat.
 - Feat: Lobby photobooth menampilkan pilihan Sendiri, Buat Ruangan, Masuk Ruangan.
 - Feat: Penyimpanan mode room (single/two) pada create/join/store.
